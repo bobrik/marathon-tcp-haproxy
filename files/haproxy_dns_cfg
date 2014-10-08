@@ -12,7 +12,6 @@ To gracefully reload haproxy:
 
 USAGE
 }; function --help { -h ;}
-export LC_ALL=en_US.UTF-8
 
 function header {
   cat <<EOF
