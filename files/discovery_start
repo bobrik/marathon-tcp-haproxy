@@ -9,7 +9,13 @@ run_command() {
 }
 
 reload_conf() {
-  haproxy_dns_cfg $DISCOVERY_URL > $HAPROXY_CONF || echo "Marathon is not available" && return
+  MARATHON_AVAILABLE=1
+  haproxy_dns_cfg $DISCOVERY_URL > $HAPROXY_CONF || MARATHON_AVAILABLE=0
+  if [ $MARATHON_AVAILABLE -ne 1 ]; then
+      echo "Marathon is not available"
+      return
+  fi
+
   echo "Reloading conf"
   run_command "haproxy -f $HAPROXY_CONF -sf $HAPROXY_PID"
 }
