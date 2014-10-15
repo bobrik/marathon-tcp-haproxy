@@ -9,10 +9,17 @@ run_command() {
 }
 
 reload_conf() {
+  PREV_MD5=$(md5sum /etc/haproxy/haproxy.cfg)
   MARATHON_AVAILABLE=1
   haproxy_dns_cfg $DISCOVERY_URL > /etc/haproxy/haproxy.cfg || MARATHON_AVAILABLE=0
   if [ $MARATHON_AVAILABLE -ne 1 ]; then
       echo "Marathon is not available"
+      return
+  fi
+
+  CURR_MD5=$(md5sum /etc/haproxy/haproxy.cfg)
+  if [ "${PREV_MD5}" = "${CURR_MD5}" ]; then
+      echo "Config is the same"
       return
   fi
 

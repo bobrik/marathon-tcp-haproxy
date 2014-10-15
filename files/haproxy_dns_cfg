@@ -51,11 +51,17 @@ listen ${name}_cluster
   option tcplog
   balance leastconn
 EOF
+
+    SERVERS=""
     while [[ $# -gt 0 ]]
     do
-      out "  server ${name}-$# $1 check"
+      SERVER=$(echo $1 | sed 's/\./-/g' | sed 's/:/-/g')
+      SERVERS="${SERVERS}
+  server ${name}-${SERVER} $1 check"
       shift
     done
+
+    echo "${SERVERS}" | sort
   done <<< "$1"
 }
 
