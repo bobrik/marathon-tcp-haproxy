@@ -46,7 +46,7 @@ function backend {
     cat <<EOF
 
 listen ${name}_cluster
-  bind 127.0.0.1:${port}
+  bind ${HAPROXY_HOST}:${port}
   mode tcp
   option tcplog
   balance leastconn

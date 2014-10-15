@@ -10,14 +10,14 @@ run_command() {
 
 reload_conf() {
   MARATHON_AVAILABLE=1
-  haproxy_dns_cfg $DISCOVERY_URL > $HAPROXY_CONF || MARATHON_AVAILABLE=0
+  haproxy_dns_cfg $DISCOVERY_URL > /etc/haproxy/haproxy.cfg || MARATHON_AVAILABLE=0
   if [ $MARATHON_AVAILABLE -ne 1 ]; then
       echo "Marathon is not available"
       return
   fi
 
   echo "Reloading conf"
-  run_command "haproxy -f $HAPROXY_CONF -sf $HAPROXY_PID"
+  run_command "haproxy -f /etc/haproxy/haproxy.cfg -sf $HAPROXY_PID"
 }
 
 onexit() {
@@ -27,5 +27,5 @@ onexit() {
 }
 trap onexit SIGINT SIGTERM EXIT
 
-run_command "haproxy -f $HAPROXY_CONF"
+run_command "haproxy -f /etc/haproxy/haproxy.cfg"
 while true; do reload_conf; sleep $RELOAD_TTL; done

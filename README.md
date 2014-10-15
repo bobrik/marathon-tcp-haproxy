@@ -16,3 +16,5 @@ docker run -d --net=host -e RELOAD_TTL=10 -e DISCOVERY_URL=localhost:8080 bobrik
 
 Here `RELOAD_TTL` is interval to check marathon for new port mappings
 and `DISCOVERY_URL` is marathon host and port.
+
+You can also set `HAPROXY_HOST` to specify ip address for haproxy (`127.0.0.1` by default).
