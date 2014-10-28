@@ -62,7 +62,7 @@ EOF
     do
       SERVER=$(echo $1 | sed 's/\./-/g' | sed 's/:/-/g')
       SERVERS="${SERVERS}
-  server ${name}-${SERVER} $1"
+  server ${name}-${SERVER} $1 check"
       shift
     done
 
