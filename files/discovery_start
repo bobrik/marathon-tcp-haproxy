@@ -26,7 +26,7 @@ reload_conf() {
   mv /etc/haproxy/haproxy.cfg.next /etc/haproxy/haproxy.cfg
 
   echo "Reloading conf"
-  run_command "haproxy -f /etc/haproxy/haproxy.cfg -sf $HAPROXY_PID"
+  run_command "haproxy -f /etc/haproxy/haproxy.cfg -st $HAPROXY_PID"
 }
 
 onexit() {
