@@ -1,5 +1,12 @@
 # Haproxy as tcp proxy for marathon
 
+## Deprecation notice
+
+This project is deprecated in favor of much more robust and reliable
+[marathoner](https://github.com/bobrik/marathoner).
+
+## Haproxy for marathon in docker
+
 This is dockerized version of haproxy for marathon.
 
 Haproxy allows you to allocate port number in marathon and
